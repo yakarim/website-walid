@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/savsgio/atreugo/v11"
@@ -29,7 +28,6 @@ func init() {
 	//} else if !strings.HasPrefix(":", portln) {
 	cfg := postgre.NewConfigWith("ec2-34-235-240-133.compute-1.amazonaws.com", 5432, "qrkpjazlukiadp", "129bc7576d446c3e85369edbd5563edd18d9be2f44521e89dca5956bd5ee0df0", "dfingkdn5kgjg", "session")
 	provider, err = postgre.New(cfg)
-	fmt.Println(err)
 	//}
 
 	//provider, err = memory.New(memory.Config{})
