@@ -1,0 +1,27 @@
+{
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    },
+    {
+      "url": "https://github.com/atris/heroku-buildpack-C.git"
+    },
+    {
+      "url": "https://github.com/solana-labs/heroku-buildpack-rust-wasm-pack.git"
+    }
+  ],
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "website-walid",
+  "scripts": {
+  },
+  "stack": "heroku-20"
+}
