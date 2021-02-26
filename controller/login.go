@@ -11,7 +11,7 @@ import (
 
 // Login pages.
 func (c Ctrl) Login(ctx *atreugo.RequestCtx) error {
-	c.SessionDestroy(ctx)
+	c.deleteSession(ctx)
 	return c.HTML(ctx, 200, "pages/login", cfg.H{
 		"title":  "Login",
 		"user":   database.GetSession(ctx, "Username"),
