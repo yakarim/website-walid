@@ -2,11 +2,13 @@ package database
 
 import (
 	"log"
+	"os"
+	"strings"
 
 	"github.com/savsgio/atreugo/v11"
 	"github.com/valyala/fasthttp"
-	psgsession "github.com/yakarim/psgsession"
-	"github.com/yakarim/psgsession/providers/postgre"
+	psgsession "github.com/yakarim/psgsession/v2"
+	"github.com/yakarim/psgsession/v2/providers/postgre"
 )
 
 // Session ...
@@ -20,15 +22,15 @@ func init() {
 	var provider psgsession.Provider
 	var err error
 
-	//portln := os.Getenv("PORT")
-	//if len(portln) != 0 {
-	//	cfg := postgre.NewConfigWith("127.0.0.1", 5432, "postgres", "1234", "walid", "session")
-	//	provider, err = postgre.New(cfg)
+	portln := os.Getenv("PORT")
+	if len(portln) == 0 {
+		cfg := postgre.NewConfigWith("127.0.0.1", 5432, "postgres", "1234", "walid", "session")
+		provider, err = postgre.New(cfg)
 
-	//} else if !strings.HasPrefix(":", portln) {
-	cfg := postgre.NewConfigWith("ec2-34-235-240-133.compute-1.amazonaws.com", 5432, "qrkpjazlukiadp", "129bc7576d446c3e85369edbd5563edd18d9be2f44521e89dca5956bd5ee0df0", "dfingkdn5kgjg", "session")
-	provider, err = postgre.New(cfg)
-	//}
+	} else if !strings.HasPrefix(":", portln) {
+		cfg := postgre.NewConfigWith("ec2-34-235-240-133.compute-1.amazonaws.com", 5432, "qrkpjazlukiadp", "129bc7576d446c3e85369edbd5563edd18d9be2f44521e89dca5956bd5ee0df0", "dfingkdn5kgjg", "session")
+		provider, err = postgre.New(cfg)
+	}
 
 	//provider, err = memory.New(memory.Config{})
 	cfg1 := psgsession.NewDefaultConfig()
