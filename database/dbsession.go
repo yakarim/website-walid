@@ -1,6 +1,13 @@
 package database
 
-/*
+import (
+	"fmt"
+	"log"
+
+	"github.com/yakarim/session"
+	"github.com/yakarim/session/providers/postgre"
+)
+
 // ServerSession ...
 var ServerSession *session.Session
 
@@ -34,4 +41,3 @@ func init() {
 	}
 
 }
-*/
