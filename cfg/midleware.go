@@ -30,5 +30,6 @@ func (c *Cfg) AuthMiddleware(ctx *atreugo.RequestCtx) error {
 	if database.SessionAuth(ctx) == false {
 		return ctx.RedirectResponse("/login", fasthttp.StatusUnauthorized)
 	}
+
 	return ctx.Next()
 }
