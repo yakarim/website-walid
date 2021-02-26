@@ -11,6 +11,6 @@ type Cfg struct{}
 var (
 	views = jet.NewHTMLSet("./template")
 
-	db = database.DB
-	//session = database.ServerSession
+	db      = database.DB
+	session = database.Session
 )

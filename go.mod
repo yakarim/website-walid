@@ -17,5 +17,6 @@ require (
 	github.com/savsgio/go-logger/v2 v2.1.0
 	github.com/twinj/uuid v1.0.0
 	github.com/valyala/fasthttp v1.21.0
+	github.com/yakarim/psgsession v0.0.0-20210226015446-b062aad8f8aa
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 )

@@ -4,6 +4,7 @@ import (
 	jsoniter "github.com/json-iterator/go"
 	"github.com/savsgio/atreugo/v11"
 	"github.com/yakarim/website-walid/cfg"
+	"github.com/yakarim/website-walid/database"
 	"github.com/yakarim/website-walid/model"
 )
 
@@ -16,7 +17,7 @@ type Ctrl struct {
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
-//var session = database.ServerSession
+var session = database.Session
 
 // RouterAPI ...
 func (c *Ctrl) RouterAPI(ctx *atreugo.Atreugo) {

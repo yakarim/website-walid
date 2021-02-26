@@ -4,19 +4,21 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/yakarim/session"
-	"github.com/yakarim/session/providers/postgre"
+	"github.com/savsgio/atreugo/v11"
+	"github.com/valyala/fasthttp"
+	psgsession "github.com/yakarim/psgsession"
+	"github.com/yakarim/psgsession/providers/postgre"
 )
 
-// ServerSession ...
-var ServerSession *session.Session
+// Session ...
+var Session *psgsession.Session
 
 func init() {
 
-	encoder := session.Base64Encode
-	decoder := session.Base64Decode
+	encoder := psgsession.Base64Encode
+	decoder := psgsession.Base64Decode
 
-	var provider session.Provider
+	var provider psgsession.Provider
 	var err error
 
 	//portln := os.Getenv("PORT")
@@ -31,13 +33,35 @@ func init() {
 	//}
 
 	//provider, err = memory.New(memory.Config{})
-	cfg1 := session.NewDefaultConfig()
+	cfg1 := psgsession.NewDefaultConfig()
 	cfg1.EncodeFunc = encoder
 	cfg1.DecodeFunc = decoder
-	ServerSession = session.New(cfg1)
+	Session = psgsession.New(cfg1)
 
-	if err = ServerSession.SetProvider(provider); err != nil {
+	if err = Session.SetProvider(provider); err != nil {
 		log.Fatal(err)
 	}
 
+}
+
+// GetSession ...
+func GetSession(ctx *atreugo.RequestCtx, str string) interface{} {
+	store, err := Session.Get(ctx.RequestCtx)
+	if err != nil {
+		ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
+	}
+	return store.Get(str)
+}
+
+// SessionAuth ...
+func SessionAuth(ctx *atreugo.RequestCtx) bool {
+	store, err := Session.Get(ctx.RequestCtx)
+	if err != nil {
+		return false
+	}
+	id := store.Get("ID")
+	if id != nil {
+		return true
+	}
+	return false
 }

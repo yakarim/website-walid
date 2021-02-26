@@ -3,6 +3,7 @@ package cfg
 import (
 	"github.com/savsgio/atreugo/v11"
 	"github.com/valyala/fasthttp"
+	"github.com/yakarim/website-walid/database"
 )
 
 // Auth login
@@ -25,18 +26,8 @@ func (c *Cfg) AuthMiddleware(ctx *atreugo.RequestCtx) error {
 	if string(ctx.Path()) == "/login" {
 		return ctx.Next()
 	}
-	/*
-		store, err := session.Get(ctx.RequestCtx)
-		if err != nil {
-			ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
-		}
 
-		val := store.Get("ID")
-		if val == nil {
-			return ctx.RedirectResponse("/login", fasthttp.StatusUnauthorized)
-		}
-	*/
-	if c.SessionID(ctx) == false {
+	if database.SessionAuth(ctx) == false {
 		return ctx.RedirectResponse("/login", fasthttp.StatusUnauthorized)
 	}
 	return ctx.Next()
