@@ -1,8 +1,6 @@
 package controller
 
 import (
-	"fmt"
-
 	"github.com/savsgio/atreugo/v11"
 	"github.com/valyala/fasthttp"
 	"github.com/yakarim/website-walid/cfg"
@@ -48,7 +46,6 @@ func (c Ctrl) LoginJwt(ctx *atreugo.RequestCtx) error {
 		}()
 		store.Set("ID", u.ID)
 		store.Set("Username", u.Username)
-		fmt.Println(store.Get("Username"))
 
 		ctx.RedirectResponse("/admin", ctx.Response.StatusCode())
 	}
