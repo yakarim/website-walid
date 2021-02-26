@@ -1,12 +1,8 @@
 package controller
 
 import (
-	"fmt"
-
 	"github.com/savsgio/atreugo/v11"
-	"github.com/valyala/fasthttp"
 	"github.com/yakarim/website-walid/cfg"
-	"github.com/yakarim/website-walid/database"
 )
 
 // Login pages.
@@ -37,26 +33,11 @@ func (c Ctrl) LoginJwt(ctx *atreugo.RequestCtx) error {
 		session.Set("ID", u.ID)
 		session.Set("Username", u.Username)
 
-		store, err := database.ServerSession.Get(ctx.RequestCtx)
-		if err != nil {
-			return err
-		}
-
-		defer func() {
-			err = database.ServerSession.Save(ctx.RequestCtx, store)
-		}()
-
-		store.Set("foo", "bar")
-		fmt.Println(store.Get("foo"))
 		ctx.RedirectResponse("/admin", ctx.Response.StatusCode())
 	}
 	return nil
 }
 
 func (c Ctrl) deleteSession(ctx *atreugo.RequestCtx) {
-	err := session.Destroy(ctx.RequestCtx)
-	if err != nil {
-		ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
-	}
 
 }

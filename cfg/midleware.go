@@ -8,15 +8,6 @@ import (
 // Auth login
 func (c *Cfg) Auth(ctx *atreugo.RequestCtx) (string, bool) {
 
-	store, err := session.Get(ctx.RequestCtx)
-	if err != nil {
-		ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
-	}
-
-	val := store.Get("Username")
-	if val != nil {
-		return val.(string), true
-	}
 	return "", false
 }
 
