@@ -56,5 +56,5 @@ func (c Ctrl) LoginJwt(ctx *atreugo.RequestCtx) error {
 }
 
 func (c Ctrl) deleteSession(ctx *atreugo.RequestCtx) {
-
+	session.Destroy(ctx.RequestCtx)
 }
