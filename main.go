@@ -55,8 +55,8 @@ func main() {
 	})
 
 	ctx.UseBefore(cors)
-	go StaticPath(ctx)
-	//c.Static(ctx)
+	//StaticPath(ctx)
+	go c.Static(ctx)
 	ctrl.Router(ctx)
 	//ctx.GET("/wasm", Index)
 	preforkServer := &fastprefork.Prefork{
