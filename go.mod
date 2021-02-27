@@ -8,6 +8,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/google/uuid v1.2.0
 	github.com/gorilla/securecookie v1.1.1
+	github.com/gowebapi/webapi v0.0.0-20210130090710-704d94b49d10
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
 	github.com/json-iterator/go v1.1.10
@@ -28,4 +29,6 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
+	honnef.co/go/js/dom v0.0.0-20200509013220-d4405f7ab4d8
+	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
 )

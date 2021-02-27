@@ -58,7 +58,6 @@ func main() {
 	//StaticPath(ctx)
 	c.Static(ctx)
 	ctrl.Router(ctx)
-	//ctx.GET("/wasm", Index)
 	preforkServer := &fastprefork.Prefork{
 		RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
 		ServeFunc:        ctx.Serve,
