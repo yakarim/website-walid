@@ -8,4 +8,10 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/login", c.Login)
 	ctx.POST("/login__jwt", c.LoginJwt)
 	ctx.GET("/admin", c.Admin).UseBefore(c.AuthMiddleware)
+
+	user := ctx.NewGroupPath("/apiuser")
+	user.UseBefore(c.AuthMiddleware)
+	user.GET("/query", c.UserC.QueryAll)
+	user.POST("/", c.UserC.Create)
+	user.DELETE("/{key}", c.UserC.Delete)
 }
