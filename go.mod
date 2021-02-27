@@ -29,6 +29,4 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
-	honnef.co/go/js/dom v0.0.0-20200509013220-d4405f7ab4d8
-	honnef.co/go/js/dom/v2 v2.0.0-20200509013220-d4405f7ab4d8
 )
