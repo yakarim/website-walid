@@ -31,15 +31,8 @@ func (m *User) Query() ([]database.User, error) {
 	return user, nil
 }
 
-// UserAccount ...
-type UserAccount struct {
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-}
-
 // Create user Model ...
-func (m *User) Create(user UserAccount) error {
+func (m *User) Create(user database.User) error {
 	var wuser database.User
 	if !db.Where("email = ?", user.Email).First(&wuser).RecordNotFound() {
 		return errors.New("EMAIL_FOUND")
@@ -77,6 +70,6 @@ func (m *User) Delete(id string) error {
 	if err := db.Delete(&database.User{}, database.User{Base: database.Base{ID: id}}).Error; err != nil {
 		return err
 	}
-	return errors.New("SUKSES DELETE EMAIL")
+	return nil
 
 }

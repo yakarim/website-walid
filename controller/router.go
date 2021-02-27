@@ -8,6 +8,7 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/login", c.Login)
 	ctx.POST("/login__jwt", c.LoginJwt)
 	ctx.GET("/admin", c.Admin).UseBefore(c.AuthMiddleware)
+	ctx.GET("/useradmin", c.UserHTML).UseBefore(c.AuthMiddleware)
 
 	user := ctx.NewGroupPath("/userapi")
 	user.UseBefore(c.AuthMiddleware)

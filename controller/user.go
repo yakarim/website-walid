@@ -14,6 +14,15 @@ type User struct {
 	H cfg.H
 }
 
+// UserHTML ...
+func (c Ctrl) UserHTML(ctx *atreugo.RequestCtx) error {
+	return c.HTML(ctx, 200, "admin/user", cfg.H{
+		"title":  "user",
+		"user":   database.GetSession(ctx, "Username"),
+		"signIn": database.SessionAuth(ctx),
+	})
+}
+
 // QueryOne User...
 func (c *User) QueryOne(ctx *atreugo.RequestCtx) error {
 	key := ctx.UserValue("key")
@@ -29,19 +38,16 @@ func (c *User) QueryAll(ctx *atreugo.RequestCtx) error {
 
 // Create User ...
 func (c *User) Create(ctx *atreugo.RequestCtx) error {
-	var userl model.UserAccount
+	var userl database.User
 	json.Unmarshal(ctx.PostBody(), &userl)
 
 	if string(userl.Username) == "" || string(userl.Email) == "" || string(userl.Password) == "" {
-		c.JSON(ctx, cfg.H{"msg": "form harus disi"}, 404)
-	} else {
-		if c.UserM.Create(userl) != nil {
-			c.JSON(ctx, cfg.H{"msg": "Email Found"}, 404)
-		} else {
-			c.JSON(ctx, cfg.H{"msg": "sukses"}, 200)
-		}
+		return c.JSON(ctx, cfg.H{"msg": "form harus disi"}, 404)
 	}
-	return nil
+	if c.UserM.Create(userl) != nil {
+		return c.JSON(ctx, cfg.H{"msg": "Email Found"}, 404)
+	}
+	return c.JSON(ctx, cfg.H{"msg": "sukses"}, 200)
 }
 
 // Update user ...
@@ -50,11 +56,9 @@ func (c *User) Update(ctx *atreugo.RequestCtx) error {
 	json.Unmarshal(ctx.PostBody(), &user)
 	err := c.UserM.Update(user)
 	if c.UserM.Update(user) != nil {
-		c.JSON(ctx, cfg.H{"msg": err.Error()}, 404)
-	} else {
-		c.JSON(ctx, cfg.H{"msg": "sukses"}, 200)
+		return c.JSON(ctx, cfg.H{"msg": err.Error()}, 404)
 	}
-	return nil
+	return c.JSON(ctx, cfg.H{"msg": "sukses"}, 200)
 }
 
 // Delete user.
@@ -62,7 +66,7 @@ func (c *User) Delete(ctx *atreugo.RequestCtx) error {
 	key := ctx.UserValue("key")
 	err := c.UserM.Delete(key.(string))
 	if err != nil {
-		c.JSON(ctx, cfg.H{"msg": err.Error()}, 404)
+		return c.JSON(ctx, cfg.H{"msg": err.Error()}, 404)
 	}
 	return c.JSON(ctx, cfg.H{"msg": "sukses"}, 200)
 }
