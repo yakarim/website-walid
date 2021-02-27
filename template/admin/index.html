@@ -93,6 +93,7 @@
           .then((res) => {
             this.msg = res.data.msg;
             this.handleQuery();
+            
           })
           .catch((err) => {
             this.msg = err.response.data.msg;

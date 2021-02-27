@@ -31,13 +31,24 @@ func (m *User) Query() ([]database.User, error) {
 	return user, nil
 }
 
+// UserAccount ...
+type UserAccount struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 // Create user Model ...
-func (m *User) Create(user database.User) error {
-	if !db.Where("email = ?", user.Email).First(&m.User).RecordNotFound() {
+func (m *User) Create(user UserAccount) error {
+	var wuser database.User
+	if !db.Where("email = ?", user.Email).First(&wuser).RecordNotFound() {
 		return errors.New("EMAIL_FOUND")
 	}
-	user.Password = m.HashAndSalt(m.GetPwd(user.Password))
-	if err := db.Model(&m.User).Create(&user).Error; err != nil {
+	var cuser database.User
+	cuser.Username = user.Username
+	cuser.Email = user.Email
+	cuser.Password = m.HashAndSalt(m.GetPwd(user.Password))
+	if err := db.Model(&m.User).Create(&cuser).Error; err != nil {
 		return err
 	}
 	return nil

@@ -29,8 +29,9 @@ func (c *User) QueryAll(ctx *atreugo.RequestCtx) error {
 
 // Create User ...
 func (c *User) Create(ctx *atreugo.RequestCtx) error {
-	var userl database.User
+	var userl model.UserAccount
 	json.Unmarshal(ctx.PostBody(), &userl)
+
 	if string(userl.Username) == "" || string(userl.Email) == "" || string(userl.Password) == "" {
 		c.JSON(ctx, cfg.H{"msg": "form harus disi"}, 404)
 	} else {
