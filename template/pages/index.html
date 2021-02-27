@@ -1,32 +1,24 @@
 [%extends "../layouts/base.html"%]
 
 [%block documentBody()%]
+<script src="/js/wasm_exec.js"></script>
+  <script src="/js/wasm.js"></script>
 <div class="container">
   <h1>
     Hallo Home
     <button class="btn btn-primary">Tes</button>
   </h1>
-  <div id="foo"></div>
+  <button type="button" id="foo">Click Me!</button>
   [% if .signIn%]
   Hallo
   [%end%]
-
   <h1>WebAssembly</h1>
   <p>Add two numbers, using WebAssembly calling an add() method written in Go:</p>
-  <input type="number" id="a" value="2" /> + <input type="number" id="b" value="2" /> = <input type="number"
-    id="result" />
-  <button>Calculate</button>
-  <script>
-    const button = document.querySelector('button');
-
-    button.addEventListener('click', event => {
-      var a = parseInt(document.getElementById("a").value);
-      var b = parseInt(document.getElementById("b").value);
-      var res = wasm.exports.add(a, b);
-      var sum_box = document.getElementById("result");
-      sum_box.value = res;
-    });
-  </script>
+  <p>Add two numbers, using WebAssembly:</p>
+<script>
+  console.log("oo"
+);
+</script>
 </div>
 
 [%end%]

@@ -3,6 +3,7 @@ package cfg
 import (
 	"os"
 	"strings"
+	"time"
 
 	"github.com/savsgio/atreugo/v11"
 )
@@ -51,7 +52,7 @@ func costumStatic(ctx *atreugo.Atreugo, name string) {
 		Root:               "./static/" + name,
 		AcceptByteRange:    true,
 		GenerateIndexPages: true,
-		//CacheDuration:      15 * time.Hour,
+		CacheDuration:      15 * time.Hour,
 		//Compress:           true,
 	}
 	ctx.StaticCustom("/"+name, rootFS)
