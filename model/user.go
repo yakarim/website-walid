@@ -22,8 +22,8 @@ func (m *User) QueryOne(ID string) (database.User, error) {
 	return user, nil
 }
 
-// Query User ...
-func (m *User) Query() ([]database.User, error) {
+// QueryAll User ...
+func (m *User) QueryAll() ([]database.User, error) {
 	var user []database.User
 	if err := db.Order("created_at desc").Find(&user).Error; err != nil {
 		return user, err

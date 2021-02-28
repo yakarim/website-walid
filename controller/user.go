@@ -9,7 +9,7 @@ import (
 
 // User ...
 type User struct {
-	model.Mdl
+	UserM model.User
 	cfg.Cfg
 	H cfg.H
 }
@@ -32,7 +32,7 @@ func (c *User) QueryOne(ctx *atreugo.RequestCtx) error {
 
 // QueryAll User...
 func (c *User) QueryAll(ctx *atreugo.RequestCtx) error {
-	data, _ := c.UserM.Query()
+	data, _ := c.UserM.QueryAll()
 	return c.JSON(ctx, cfg.H{"users": data}, 200)
 }
 

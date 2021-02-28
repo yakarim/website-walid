@@ -7,16 +7,15 @@ if ('instantiateStreaming' in WebAssembly) {
 	WebAssembly.instantiateStreaming(fetch(WASM_URL), go.importObject).then(function (obj) {
 		wasm = obj.instance;
 		go.run(wasm);
-        async function MyFunc() {
-            try {
-                const response = await MyGoFunc('https://api.taylor.rest/')
-                const message = await response.json()
-                console.log(message)
-            } catch (err) {
-                console.error('Caught exception', err)
-            }
-        }
-        MyFunc()
+		async function MyFunc() {
+			try {
+				const response = await MyGoFunc('')
+				const message = await response.json()
+				console.log(message)
+			} catch (err) {
+				console.error('Caught exception', err)
+			}
+		}
 	})
 } else {
 	fetch(WASM_URL).then(resp =>
@@ -28,3 +27,4 @@ if ('instantiateStreaming' in WebAssembly) {
 		})
 	)
 }
+

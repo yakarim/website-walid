@@ -6,7 +6,6 @@ import (
 
 // Mdl ...
 type Mdl struct {
-	UserM User
 }
 
 var db = database.DB
