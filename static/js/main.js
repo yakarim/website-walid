@@ -1,18 +1,30 @@
-/* eslint no-unused-vars: "off"*/
-if (!WebAssembly.instantiateStreaming) { // polyfill
-    WebAssembly.instantiateStreaming = async (resp, importObject) => {
-        const source = await (await resp).arrayBuffer();
-        return await WebAssembly.instantiate(source, importObject);
-    };
+const go = new Go(); // Defined in wasm_exec.js
+const WASM_URL = '/wasm/html.wasm';
+
+var wasm;
+
+if ('instantiateStreaming' in WebAssembly) {
+	WebAssembly.instantiateStreaming(fetch(WASM_URL), go.importObject).then(function (obj) {
+		wasm = obj.instance;
+		go.run(wasm);
+        async function MyFunc() {
+            try {
+                const response = await MyGoFunc('https://api.taylor.rest/')
+                const message = await response.json()
+                console.log(message)
+            } catch (err) {
+                console.error('Caught exception', err)
+            }
+        }
+        MyFunc()
+	})
+} else {
+	fetch(WASM_URL).then(resp =>
+		resp.arrayBuffer()
+	).then(bytes =>
+		WebAssembly.instantiate(bytes, go.importObject).then(function (obj) {
+			wasm = obj.instance;
+			go.run(wasm);
+		})
+	)
 }
-const go = new Go();
-let mod, inst;
-WebAssembly.instantiateStreaming(fetch("./wasm/calc.wasm"), go.importObject).then((result) => {
-    mod = result.module;
-    inst = result.instance;
-    go.run(inst);
-    WebAssembly.instantiate(mod, go.importObject); 
-    async function change(val, val2) {
-        return waAdd(...Array(val, val2))
-     }// reset instance
-});

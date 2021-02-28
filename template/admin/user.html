@@ -55,14 +55,19 @@
         </tbody>
       </table>
     </div>
+    {{json}}
   </div>
 </div>
 <script>
-  const HelloVueApp = {
+
+
+
+const HelloVueApp = {
     data() {
       return {
         users: null,
         msg: "",
+        json: [],
         showModal: false,
         user: {
           username: "",
@@ -75,6 +80,9 @@
       this.handleQuery();
     },
     methods: {
+      callhttp(){
+       this.json = call("https://jsonplaceholder.typicode.com/posts")
+      },
       handleQuery() {
         axios
           .get("/userapi/query")

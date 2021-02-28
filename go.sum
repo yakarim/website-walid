@@ -65,6 +65,8 @@ github.com/kataras/go-sessions v0.0.7 h1:PcAfxdfqTQiM2pBlmXuQmJndepVZR/x88W3uJmq
 github.com/kataras/go-sessions v3.0.0+incompatible h1:lH/nOpTHSIKtW/HywlbACRG+qPMBx0e8kCyc2hrVQms=
 github.com/kataras/go-sessions/v3 v3.3.0 h1:jIPzr8xKk2kcUad+7vSRYEilMKnqvjD0yLR4Trzns2o=
 github.com/kataras/go-sessions/v3 v3.3.0/go.mod h1:KM8MG7nEltPAVFStBgNHSUQpkq3qTmSfX6DVNI9IQ5o=
+github.com/kirinlabs/HttpRequest v1.1.1 h1:eBbFzpRd/Y7vQhRY30frHK3yAJiT1wDlB31Ryzyklc0=
+github.com/kirinlabs/HttpRequest v1.1.1/go.mod h1:XV38fA4rXZox83tlEV9KIQ7Cdsut319x6NGzVLuRlB8=
 github.com/klauspost/compress v1.10.7 h1:7rix8v8GpI3ZBb0nSozFRgbtXKv+hOe+qfEpZqybrAg=
 github.com/klauspost/compress v1.10.7/go.mod h1:aoV0uJVorq1K+umq18yTdKaF57EivdYsUV+/s2qKfXs=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=

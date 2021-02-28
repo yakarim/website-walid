@@ -1,23 +1,19 @@
 [%extends "../layouts/base.html"%]
 
 [%block documentBody()%]
-<script src="/js/wasm_exec.js"></script>
-  <script src="/js/wasm.js"></script>
+
 <div class="container">
   <h1>
     Hallo Home
     <button class="btn btn-primary">Tes</button>
   </h1>
-  <button type="button" id="foo">Click Me!</button>
   [% if .signIn%]
   Hallo
   [%end%]
   <h1>WebAssembly</h1>
-  <p>Add two numbers, using WebAssembly calling an add() method written in Go:</p>
-  <p>Add two numbers, using WebAssembly:</p>
+
 <script>
-  console.log("oo"
-);
+  console.log("oo");
 </script>
 </div>
 
