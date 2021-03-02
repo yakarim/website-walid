@@ -50,9 +50,9 @@
             <td>{{ u.username }}</td>
             <td>{{ u.email }}</td>
             <td>
-              <button @click="handleDelete(u.ID)" type="button" class="btn btn-danger">
-                Delete
-              </button>
+              <a @click="handleDelete(u.ID)" class="btn">
+                <i class="far fa-trash-alt"></i>
+              </a>
             </td>
           </tr>
         </tbody>

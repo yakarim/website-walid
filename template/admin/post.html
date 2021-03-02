@@ -38,19 +38,18 @@
         </div>
         <br />
         <div class="form-group">
-          <quill-editor  v-model="post.content" :options="editorOption"
-             />
+          <quill-editor v-model="post.content" :options="editorOption" />
         </div>
 
         <br />
         <div class="form-group">
 
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">
-            {{button}} Post
-          </button>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+              {{button}} Post
+            </button>
+          </div>
         </div>
-      </div>
       </form>
     </div>
     <div class="row">
@@ -71,12 +70,13 @@
             <td v-html="u.content"></td>
             <td>{{ u.author_id }}</td>
             <td>
-              <a @click="handleDelete(u.ID)" type="button" class="btn btn-danger">
-                Delete
+              <a @click="updatePost(u)" type="button" class="btn">
+                <i class="fas fa-user-edit"></i>
               </a>
-              <a @click="updatePost(u)" type="button" class="btn btn-danger">
-                Update
+              <a @click="handleDelete(u.ID)" class="btn">
+                <i class="far fa-trash-alt"></i>
               </a>
+             
             </td>
           </tr>
         </tbody>
