@@ -58,6 +58,7 @@ func (m Post) Update(post database.Post) error {
 		return errors.New("ID_NOT_FOUND")
 	}
 	var cpost database.Post
+
 	cpost.ID = post.ID
 	cpost.Title = post.Title
 	cpost.Slug = slug.Make(post.Title)

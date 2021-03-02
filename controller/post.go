@@ -66,6 +66,7 @@ func (c Post) Update(ctx *atreugo.RequestCtx) error {
 		return c.JSON(ctx, cfg.H{"msg": "form harus disi"}, 404)
 	}
 	postl.ID = key.(string)
+
 	//postl.AuthorID = database.GetSession(ctx, "ID").(string)
 	if c.p.Update(postl) != nil {
 		return c.JSON(ctx, cfg.H{"msg": "Title Found"}, 404)
