@@ -7,7 +7,6 @@ import (
 
 	"github.com/CloudyKit/jet/v3"
 	"github.com/savsgio/atreugo/v11"
-	"github.com/yakarim/website-walid/database"
 )
 
 // HTML ...
@@ -45,7 +44,7 @@ func (c *Cfg) globalFunc(ctx *atreugo.RequestCtx, view *jet.Set) {
 }
 
 func user(ctx *atreugo.RequestCtx) string {
-	store, err := database.Session.Get(ctx.RequestCtx)
+	store, err := session.Get(ctx.RequestCtx)
 	if err != nil {
 		return ""
 	}
@@ -57,7 +56,7 @@ func user(ctx *atreugo.RequestCtx) string {
 }
 
 func sessionAuth(ctx *atreugo.RequestCtx) bool {
-	store, err := database.Session.Get(ctx.RequestCtx)
+	store, err := session.Get(ctx.RequestCtx)
 	if err != nil {
 		return false
 	}
