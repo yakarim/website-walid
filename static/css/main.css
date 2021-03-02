@@ -1,0 +1,23 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #d8ecaa;
+  font-size: small;
+  margin: 0;
+  font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+@media (min-width: 840px) {
+  body {
+    font-size: medium;
+  }
+}
+
+.breadcrumb {
+  background-color: #d8ecaa;
+  padding: 0%;
+}
+/*# sourceMappingURL=main.css.map */
