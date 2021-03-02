@@ -4,16 +4,13 @@ import (
 	"github.com/savsgio/atreugo/v11"
 	"github.com/valyala/fasthttp"
 	"github.com/yakarim/website-walid/cfg"
-	"github.com/yakarim/website-walid/database"
 )
 
 // Login pages.
 func (c Ctrl) Login(ctx *atreugo.RequestCtx) error {
 	c.deleteSession(ctx)
 	return c.HTML(ctx, 200, "pages/login", cfg.H{
-		"title":  "Login",
-		"user":   database.GetSession(ctx, "Username"),
-		"signIn": database.SessionAuth(ctx),
+		"title": "Login",
 	})
 }
 

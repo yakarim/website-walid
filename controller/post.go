@@ -17,9 +17,7 @@ type Post struct {
 // PostHTML ...
 func (c Ctrl) PostHTML(ctx *atreugo.RequestCtx) error {
 	return c.HTML(ctx, 200, "admin/post", cfg.H{
-		"title":  "user",
-		"user":   database.GetSession(ctx, "Username"),
-		"signIn": database.SessionAuth(ctx),
+		"title": "user",
 	})
 }
 

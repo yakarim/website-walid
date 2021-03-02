@@ -10,11 +10,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="./">Home</a>
         </li>
-        [% if .signIn%]
+        [% if signIn%]
         <li class="nav-item">
           <a class="nav-link" href="./admin">Admin</a>
         </li>
-        <a class="nav-item nav-link" href="./login">Logout [%.user%]</a>
+        <a class="nav-item nav-link" href="./login">Logout [%username%]</a>
         [% else%]
         <a class="nav-item nav-link" href="./login">Login</a>
         [%end%]
