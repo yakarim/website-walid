@@ -27,7 +27,7 @@ func init() {
 	} else if !strings.HasPrefix(":", portln) {
 		db = pqsl(os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), "require", dbport)
 	}
-	DB = db.Debug().AutoMigrate(&User{}, &Auth{}, &Post{})
+	DB = db.AutoMigrate(&User{}, &Auth{}, &Post{})
 }
 
 func pqsl(host, user, pass, database, sslmode string, port int) *gorm.DB {
