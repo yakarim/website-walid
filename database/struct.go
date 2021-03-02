@@ -1,6 +1,7 @@
 package database
 
 import (
+	"math/big"
 	"time"
 
 	"github.com/google/uuid"
@@ -37,4 +38,16 @@ type Auth struct {
 	ID       uint64 `gorm:"primary_key;auto_increment" json:"id"`
 	UserID   string `gorm:";not null;" json:"user_id"`
 	AuthUUID string `gorm:"size:255;not null;" json:"auth_uuid"`
+}
+
+// Post struct.
+type Post struct {
+	Base
+	Title        string  `json:"title"`
+	Slug         string  `json:"slug"`
+	Content      string  `json:"content"`
+	AuthorID     string  `json:"author_id"`
+	Status       int     `json:"status"`
+	Type         int     `json:"type"`
+	CommentCount big.Int `json:"comment_count"`
 }

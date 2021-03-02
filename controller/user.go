@@ -24,20 +24,20 @@ func (c Ctrl) UserHTML(ctx *atreugo.RequestCtx) error {
 }
 
 // QueryOne User...
-func (c *User) QueryOne(ctx *atreugo.RequestCtx) error {
+func (c User) QueryOne(ctx *atreugo.RequestCtx) error {
 	key := ctx.UserValue("key")
 	data, _ := c.UserM.QueryOne(key.(string))
 	return c.JSON(ctx, cfg.H{"user": data}, 200)
 }
 
 // QueryAll User...
-func (c *User) QueryAll(ctx *atreugo.RequestCtx) error {
+func (c User) QueryAll(ctx *atreugo.RequestCtx) error {
 	data, _ := c.UserM.QueryAll()
 	return c.JSON(ctx, cfg.H{"users": data}, 200)
 }
 
 // Create User ...
-func (c *User) Create(ctx *atreugo.RequestCtx) error {
+func (c User) Create(ctx *atreugo.RequestCtx) error {
 	var userl database.User
 	json.Unmarshal(ctx.PostBody(), &userl)
 
@@ -51,7 +51,7 @@ func (c *User) Create(ctx *atreugo.RequestCtx) error {
 }
 
 // Update user ...
-func (c *User) Update(ctx *atreugo.RequestCtx) error {
+func (c User) Update(ctx *atreugo.RequestCtx) error {
 	var user database.User
 	json.Unmarshal(ctx.PostBody(), &user)
 	err := c.UserM.Update(user)
@@ -62,7 +62,7 @@ func (c *User) Update(ctx *atreugo.RequestCtx) error {
 }
 
 // Delete user.
-func (c *User) Delete(ctx *atreugo.RequestCtx) error {
+func (c User) Delete(ctx *atreugo.RequestCtx) error {
 	key := ctx.UserValue("key")
 	err := c.UserM.Delete(key.(string))
 	if err != nil {

@@ -1,14 +1,6 @@
 package controller
 
-import (
-	"log"
-
-	"github.com/savsgio/atreugo/v11"
-	"github.com/valyala/fasthttp"
-	"github.com/yakarim/website-walid/cfg"
-	"github.com/yakarim/website-walid/database"
-)
-
+/*
 // LoginPost ...
 func (c *Ctrl) LoginPost(ctx *atreugo.RequestCtx) error {
 	var userl database.User
@@ -47,3 +39,4 @@ func (c *Ctrl) Logout(ctx *atreugo.RequestCtx) error {
 	}
 	return c.JSON(ctx, cfg.H{"msg": "succesfuly"}, fasthttp.StatusOK)
 }
+*/

@@ -24,32 +24,24 @@ func (c Ctrl) LoginJwt(ctx *atreugo.RequestCtx) error {
 	password := ctx.FormValue("password")
 
 	if len(email) == 0 || len(password) == 0 {
-		ctx.RedirectResponse("/login", ctx.Response.StatusCode())
+		return ctx.RedirectResponse("/login", ctx.Response.StatusCode())
 	}
 	u, b, _ := c.ValidateUser(string(email), string(password))
 	if b == false {
-		ctx.RedirectResponse("/login", ctx.Response.StatusCode())
-	} else {
-		/*
-			session := cfg.Session.StartFasthttp(ctx.RequestCtx)
-			session.Set("ID", u.ID)
-			session.Set("Username", u.Username)
-		*/
-		store, err := session.Get(ctx.RequestCtx)
-		if err != nil {
+		return ctx.RedirectResponse("/login", ctx.Response.StatusCode())
+	}
+	store, err := session.Get(ctx.RequestCtx)
+	if err != nil {
+		ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
+	}
+	defer func() {
+		if err := session.Save(ctx.RequestCtx, store); err != nil {
 			ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
 		}
-		defer func() {
-			if err := session.Save(ctx.RequestCtx, store); err != nil {
-				ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
-			}
-		}()
-		store.Set("ID", u.ID)
-		store.Set("Username", u.Username)
-
-		ctx.RedirectResponse("/admin", ctx.Response.StatusCode())
-	}
-	return nil
+	}()
+	store.Set("ID", u.ID)
+	store.Set("Username", u.Username)
+	return ctx.RedirectResponse("/admin", ctx.Response.StatusCode())
 }
 
 func (c Ctrl) deleteSession(ctx *atreugo.RequestCtx) {
