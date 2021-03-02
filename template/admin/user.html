@@ -1,6 +1,9 @@
 [%extends "../layouts/base.html"%]
 
 [%block documentBody()%]
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <div class="container">
   <h1>
     Hallo admin [%.title%]
@@ -20,8 +23,8 @@
         </div>
         <br />
         <div class="form-group">
-          <input v-model="user.password" type="password" min="4" name="password" id="password" class="form-control my-input"
-            placeholder="Password" />
+          <input v-model="user.password" type="password" min="4" name="password" id="password"
+            class="form-control my-input" placeholder="Password" />
         </div>
         <br />
         <div class="text-center">
@@ -59,10 +62,8 @@
   </div>
 </div>
 <script>
-
-
-
-const HelloVueApp = {
+  new Vue({
+    el: "#hello-vue",
     data() {
       return {
         users: null,
@@ -80,8 +81,8 @@ const HelloVueApp = {
       this.handleQuery();
     },
     methods: {
-      callhttp(){
-       this.json = call("https://jsonplaceholder.typicode.com/posts")
+      callhttp() {
+        this.json = call("https://jsonplaceholder.typicode.com/posts")
       },
       handleQuery() {
         axios
@@ -101,7 +102,7 @@ const HelloVueApp = {
           .then((res) => {
             this.msg = res.data.msg;
             this.handleQuery();
-            
+
           })
           .catch((err) => {
             this.msg = err.response.data.msg;
@@ -119,9 +120,7 @@ const HelloVueApp = {
           });
       },
     }
-  }
-
-  Vue.createApp(HelloVueApp).mount('#hello-vue')
+  })
 </script>
 
 [%end%]
