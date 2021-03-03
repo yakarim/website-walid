@@ -1,21 +1,19 @@
-:go:func Index(pageTitle string, youAreUsingJade bool)
+:go:func Index(pageTitle string, signIn bool)
 
 mixin for(golang)
 	#cmd Precompile jade templates to #{golang} code.
 
 doctype html
 html(lang="en")
-	head
-		title= pageTitle
-        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css")
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js") 
+	include ./base/header.jade
 	body
-     #container
+    include ./base/navbar.jade
+     .container
 		h1 Jade - template engine
 			+for('Go')
 
 		#container.col
-			if youAreUsingJade
+			if signIn
 				p You are amazing
 			else
 				p Get on it!
@@ -25,4 +23,4 @@ html(lang="en")
 				a #[strong focus] on performance 
 				and powerful features.
 		footer
-			include footer.jade
+			include ./base/footer.jade

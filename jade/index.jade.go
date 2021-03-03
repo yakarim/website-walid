@@ -8,19 +8,19 @@ import (
 
 const (
 	index__0 = `<!DOCTYPE html><html lang="en"><head><title>`
-	index__1 = `</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"/><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script></head><body><div id="container"><h1>Jade - template engine`
+	index__1 = `</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"/><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script></head><body></body><div class="container"><h1>Jade - template engine`
 	index__2 = `</h1><div id="container" class="col">`
 	index__3 = `<p>				Jade/Pug is a terse and simple
 				templating language with
 				a <strong>focus</strong> on performance 
-				and powerful features.</p></div><footer><div class="footer">2020</div></footer></div></body></html>`
+				and powerful features.</p></div><footer><div class="footer">2020</div></footer></div></html>`
 	index__4 = `<div id="cmd">Precompile jade templates to `
 	index__5 = ` code.</div>`
 	index__6 = `<p>You are amazing</p>`
 	index__7 = `<p>Get on it!</p>`
 )
 
-func Index(pageTitle string, youAreUsingJade bool, wr io.Writer) {
+func Index(pageTitle string, signIn bool, wr io.Writer) {
 	buffer := &WriterAsBuffer{wr}
 
 	buffer.WriteString(index__0)
@@ -39,7 +39,7 @@ func Index(pageTitle string, youAreUsingJade bool, wr io.Writer) {
 
 	buffer.WriteString(index__2)
 
-	if youAreUsingJade {
+	if signIn {
 		buffer.WriteString(index__6)
 
 	} else {

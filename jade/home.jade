@@ -1,0 +1,12 @@
+extends ./layout.jade
+block golang
+    golang= :go:func Pages(pageTitle string, signIn bool)
+
+    mixin for(golang)
+        #cmd Precompile jade templates to #{golang} code.
+
+block title
+  title Article Title
+
+block content
+  h1 My Article
