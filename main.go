@@ -13,14 +13,14 @@ import (
 	"github.com/yakarim/website-walid/cfg"
 	"github.com/yakarim/website-walid/cfg/cache"
 	"github.com/yakarim/website-walid/controller"
-	"github.com/yakarim/website-walid/templates"
+	"github.com/yakarim/website-walid/jade"
 )
 
 var (
 	c       cfg.Cfg
 	ctrl    controller.Ctrl
 	storage cache.Storage
-	t       templates.Tmpl
+	j       jade.Jade
 )
 
 func init() {
@@ -60,7 +60,7 @@ func main() {
 	//StaticPath(ctx)
 	c.Static(ctx)
 	ctrl.Router(ctx)
-	t.RouteQuick(ctx)
+	j.Routes(ctx)
 	preforkServer := &fastprefork.Prefork{
 		RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
 		ServeFunc:        ctx.Serve,
