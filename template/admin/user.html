@@ -1,4 +1,13 @@
 [%extends "../layouts/base.html"%]
+{{block button(label, href="javascript:void(0)")}}
+  <a href="{{ href }}">{{ label }}</a>
+{{end}}
+
+{{block ul()}}
+  <ul>
+    {{yield content}}
+  </ul>
+{{end}}
 
 [%block documentBody()%]
 
