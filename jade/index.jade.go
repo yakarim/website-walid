@@ -8,14 +8,12 @@ import (
 
 const (
 	index__0 = `<!DOCTYPE html><html lang="en"><head><title>`
-	index__1 = `</title><script type="text/javascript">			if(question){
-				answer(40 + 2)
-			}</script></head><body><h1>Jade - template engine`
+	index__1 = `</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"/><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script></head><body><div id="container"><h1>Jade - template engine`
 	index__2 = `</h1><div id="container" class="col">`
 	index__3 = `<p>				Jade/Pug is a terse and simple
 				templating language with
 				a <strong>focus</strong> on performance 
-				and powerful features.</p></div><footer><div class="footer">2020</div></footer></body></html>`
+				and powerful features.</p></div><footer><div class="footer">2020</div></footer></div></body></html>`
 	index__4 = `<div id="cmd">Precompile jade templates to `
 	index__5 = ` code.</div>`
 	index__6 = `<p>You are amazing</p>`

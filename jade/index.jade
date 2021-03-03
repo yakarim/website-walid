@@ -7,11 +7,10 @@ doctype html
 html(lang="en")
 	head
 		title= pageTitle
-		script(type='text/javascript').
-			if(question){
-				answer(40 + 2)
-			}
+        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js") 
 	body
+     #container
 		h1 Jade - template engine
 			+for('Go')
 
