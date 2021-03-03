@@ -6,7 +6,7 @@ import "github.com/savsgio/atreugo/v11"
 func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/", c.Index)
 	ctx.GET("/login", c.Login)
-	ctx.POST("/login__jwt", c.LoginJwt)
+	ctx.POST("/loginjwt", c.LoginJwt)
 	ctx.GET("/admin", c.Admin).UseBefore(c.AuthMiddleware)
 	ctx.GET("/useradmin", c.UserHTML).UseBefore(c.AuthMiddleware)
 	ctx.GET("/postadmin", c.PostHTML).UseBefore(c.AuthMiddleware)

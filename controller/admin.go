@@ -7,6 +7,7 @@ import (
 
 // Admin ...
 func (c Ctrl) Admin(ctx *atreugo.RequestCtx) error {
+
 	return c.HTML(ctx, 200, "admin/index", cfg.H{
 		"title": "admin",
 	})

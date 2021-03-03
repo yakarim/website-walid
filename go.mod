@@ -21,6 +21,7 @@ require (
 	github.com/ssor/bom v0.0.0-20170718123548-6386211fdfcf // indirect
 	github.com/twinj/uuid v1.0.0
 	github.com/valyala/fasthttp v1.21.0
+	github.com/valyala/quicktemplate v1.6.3
 	github.com/yakarim/psgsession/v2 v2.0.0-20210226053412-78845a951068
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 	jaytaylor.com/html2text v0.0.0-20200412013138-3577fbdbcff7
