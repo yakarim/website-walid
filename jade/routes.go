@@ -27,6 +27,6 @@ func username(ctx *atreugo.RequestCtx) string {
 
 func homefunc(ctx *atreugo.RequestCtx) error {
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	home("home", username(ctx), database.SessionAuth(ctx), ctx)
+	Index("home", username(ctx), database.SessionAuth(ctx), ctx)
 	return nil
 }

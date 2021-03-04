@@ -1,6 +1,9 @@
 package controller
 
-import "github.com/savsgio/atreugo/v11"
+import (
+	"github.com/savsgio/atreugo/v11"
+	"github.com/yakarim/website-walid/jade"
+)
 
 // Router ...
 func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
@@ -23,4 +26,11 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	post.POST("/", c.Post.Create)
 	post.PUT("/{key}", c.Post.Update)
 	post.DELETE("/{key}", c.Post.Delete)
+}
+
+// Home ...
+func (c Ctrl) Home(ctx *atreugo.RequestCtx) error {
+	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
+	jade.Index("home", c.Username(ctx), c.SessionAuth(ctx), ctx)
+	return nil
 }

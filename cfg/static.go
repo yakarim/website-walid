@@ -26,11 +26,11 @@ func (c *Cfg) Port() (atreugo.Config, string) {
 	} else if !strings.HasPrefix(":", port) {
 		port = ":" + port
 		config = atreugo.Config{
-			Addr: "0.0.0.0:" + port,
-			Name: "Kreasindo Pratama",
-			//ReduceMemoryUsage: true,
-			Compress:    true,
-			Concurrency: 100,
+			Addr:              "0.0.0.0:" + port,
+			Name:              "Kreasindo Pratama",
+			ReduceMemoryUsage: true,
+			Compress:          true,
+			Concurrency:       100,
 			//GracefulShutdown:  true,
 		}
 	}
