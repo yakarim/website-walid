@@ -20,7 +20,7 @@ var (
 	c       cfg.Cfg
 	ctrl    controller.Ctrl
 	storage cache.Storage
-	j       jade.Jade
+	jde     jade.Jade
 )
 
 func init() {
@@ -60,7 +60,7 @@ func main() {
 	//StaticPath(ctx)
 	c.Static(ctx)
 	ctrl.Router(ctx)
-	j.Routes(ctx)
+	jde.Router(ctx)
 	preforkServer := &fastprefork.Prefork{
 		RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
 		ServeFunc:        ctx.Serve,

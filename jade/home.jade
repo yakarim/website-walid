@@ -1,12 +1,22 @@
-extends ./layout.jade
-block golang
-    golang= :go:func Pages(pageTitle string, signIn bool)
+:go:func home(pageTitle, user string, signIn bool)
 
-    mixin for(golang)
-        #cmd Precompile jade templates to #{golang} code.
-
-block title
-  title Article Title
-
-block content
-  h1 My Article
+doctype html
+html(lang="en")
+	head
+		include base/head.jade
+	body
+        include base/navbar.jade
+        .container
+            h1 Jade - template engine
+            #container.col
+                if signIn
+                    p You are amazing
+                else
+                    p Get on it!
+                p.
+                    Jade/Pug is a terse and simple
+                    templating language with
+                    a #[strong focus] on performance 
+                    and powerful features.
+		        footer
+                    include base/footer.jade
