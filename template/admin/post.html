@@ -1,13 +1,13 @@
 [%extends "../layouts/base.html"%]
 
 {{block button(label, href="javascript:void(0)")}}
-  <a href="{{ href }}">{{ label }}</a>
+<a href="{{ href }}">{{ label }}</a>
 {{end}}
 
 {{block ul()}}
-  <ul>
-    {{yield content}}
-  </ul>
+<ul>
+  {{yield content}}
+</ul>
 {{end}}
 
 [%block documentBody()%]
@@ -48,7 +48,8 @@
         </div>
         <br />
         <div class="form-group">
-          <quill-editor v-model="post.content" :options="editorOption" />
+          <input type="file" @change="uploadFunction" id="file" hidden>
+          <quill-editor v-model="post.content" :options="editorOption" ref="quillEdit" />
         </div>
 
         <br />
@@ -105,7 +106,17 @@
         showModal: false,
         button: "Create",
         editorOption: {
-          theme: 'snow'
+          theme: 'snow',
+          modules: {
+            toolbar: {
+              container: [["bold", "image"]],
+              handlers: {
+                image: function () {
+                  document.getElementById('file').click()
+                }
+              }
+            },
+          }
         },
         post: {
           id: "",
@@ -193,6 +204,25 @@
       onEditorChange({ quill, html, text }) {
 
         this.post.content = html
+      },
+      uploadFunction(e) {
+        this.selectedFile = e.target.files[0];
+        var form = new FormData();
+        form.append("file", this.selectedFile);
+        form.append("name", this.selectedFile.name);
+
+        axios.post('./media-save', form, {
+          'headers': {
+            'Content-Type': "multipart/form-data"
+          }
+        })
+          .then(r => {
+            const range = this.$refs.quillEdit.quill.getSelection()
+            this.$refs.quillEdit.quill.insertEmbed(range.index, 'image', `./${r.data.url}`)
+          })
+          .catch(r => {
+            console.log('error')
+          })
       }
     }
   })

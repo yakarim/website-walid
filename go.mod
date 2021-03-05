@@ -12,6 +12,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
 	github.com/json-iterator/go v1.1.10
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/savsgio/atreugo/v11 v11.6.3
 	github.com/savsgio/go-logger v1.0.0
 	github.com/savsgio/go-logger/v2 v2.1.0

@@ -10,6 +10,7 @@ import (
 type Ctrl struct {
 	User User
 	Post Post
+	Img  Img
 	cfg.Cfg
 }
 

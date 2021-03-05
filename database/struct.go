@@ -51,3 +51,12 @@ type Post struct {
 	Type         int     `json:"type"`
 	CommentCount big.Int `json:"comment_count"`
 }
+
+// Images ...
+type Images struct {
+	UID  string `gorm:"primary_key" json:"uid"`
+	Name string `json:"name"`
+	Body []byte `json:"body"`
+	Type string `json:"type"`
+	Size int64  `json:"size"`
+}

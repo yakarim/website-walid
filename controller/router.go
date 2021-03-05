@@ -13,6 +13,8 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/admin", c.Admin).UseBefore(c.AuthMiddleware)
 	ctx.GET("/useradmin", c.UserHTML).UseBefore(c.AuthMiddleware)
 	ctx.GET("/postadmin", c.PostHTML).UseBefore(c.AuthMiddleware)
+	ctx.POST("/media-save", c.Img.ImageSave).UseBefore(c.AuthMiddleware)
+	ctx.GET("/media-get-{key}", c.Img.ImageGet).UseBefore(c.AuthMiddleware)
 
 	user := ctx.NewGroupPath("/userapi")
 	user.UseBefore(c.AuthMiddleware)
