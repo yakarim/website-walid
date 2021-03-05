@@ -38,12 +38,13 @@ func (c Ctrl) LoginJwt(ctx *atreugo.RequestCtx) error {
 			ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
 		}
 	}()
-	err = store.SetExpiration(60 * 24 * 30 * time.Minute)
+	err = store.SetExpiration(24 * 30 * time.Hour)
 	if err != nil {
 		ctx.Error(err.Error(), fasthttp.StatusInternalServerError)
 	}
 	store.Set("ID", u.ID)
 	store.Set("Username", u.Username)
+
 	return ctx.RedirectResponse("/admin", ctx.Response.StatusCode())
 }
 

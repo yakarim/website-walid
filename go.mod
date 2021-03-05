@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/CloudyKit/jet/v3 v3.0.1
+	github.com/Joker/hpp v1.0.0 // indirect
 	github.com/atreugo/cors v1.0.4
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/google/uuid v1.2.0

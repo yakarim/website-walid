@@ -15,13 +15,13 @@ func (c *Cfg) Port() (atreugo.Config, string) {
 	if len(port) == 0 {
 		port = ":3000"
 		config = atreugo.Config{
-			Addr: "0.0.0.0:" + port,
-			Name: "Kreasindo Pratama",
-			//ReduceMemoryUsage: true,
-			Compress: true,
+			Addr:              "0.0.0.0:" + port,
+			Name:              "Kreasindo Pratama",
+			ReduceMemoryUsage: true,
+			Compress:          true,
 			//Concurrency:       100,
 			//GracefulShutdown: true,
-			//Debug: true,
+			Debug: true,
 		}
 	} else if !strings.HasPrefix(":", port) {
 		port = ":" + port
