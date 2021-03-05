@@ -19,7 +19,7 @@ func (c *Cfg) HTML(ctx *atreugo.RequestCtx, code int, page string, data H) error
 		views.SetDevelopmentMode(false)
 	}
 	t, vars := c.template(ctx, code, page)
-	return t.Execute(ctx.RequestCtx, vars, data)
+	return t.Execute(ctx, vars, data)
 }
 
 func (c *Cfg) template(ctx *atreugo.RequestCtx, code int, page string) (*jet.Template, jet.VarMap) {
