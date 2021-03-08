@@ -13,12 +13,10 @@
 [%block documentBody()%]
 <!-- Include the Quill library -->
 
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
 
 <!-- Quill JS Vue -->
-<script src="https://cdn.jsdelivr.net/npm/vue-quill-editor@3.0.6/dist/vue-quill-editor.js"></script>
+
 <!-- Include stylesheet -->
 <link href="https://cdn.quilljs.com/1.3.4/quill.core.css" rel="stylesheet">
 <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
@@ -35,6 +33,11 @@
   }
 </style>
 <div class="container">
+  <div id="app">
+    {{message}}
+
+  </div>
+
   <div id="vueapp" class="demo">
     <div class="row">
       <form @submit.prevent="handlePost">
@@ -94,138 +97,10 @@
     </div>
   </div>
 </div>
+<script src="./js/bundle.js"></script>
+
 <script>
-  Vue.use(window.VueQuillEditor)
-
-  new Vue({
-    el: "#vueapp",
-    data() {
-      return {
-        posts: null,
-        msg: "",
-        showModal: false,
-        button: "Create",
-        editorOption: {
-          theme: 'snow',
-          modules: {
-            toolbar: {
-              container: [["bold", "image"]],
-              handlers: {
-                image: function () {
-                  document.getElementById('file').click()
-                }
-              }
-            },
-          }
-        },
-        post: {
-          id: "",
-          title: "",
-          content: "",
-        }
-      }
-    },
-    mounted() {
-      this.handleQuery();
-    },
-
-    methods: {
-      handleQuery() {
-        axios
-          .get("/postapi/query")
-          .then((res) => {
-            this.posts = res.data.posts;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      },
-      handlePost() {
-        if (this.post.id == "") {
-          var data = {
-            "title": this.post.title,
-            "content": this.post.content
-          }
-          axios
-            .post("./postapi", data, {
-              "Content-Type": "application/x-www-form-urlencoded",
-            })
-            .then((res) => {
-              this.msg = res.data.msg;
-              this.handleQuery();
-              this.post = []
-            })
-            .catch((err) => {
-              this.msg = err.response.data.msg;
-              alert(this.msg)
-
-            });
-        } else {
-          var data = {
-            "title": this.post.title,
-            "content": this.post.content
-          }
-          axios
-            .put("./postapi/" + this.post.id, data, {
-              "Content-Type": "application/x-www-form-urlencoded",
-            })
-            .then((res) => {
-              this.msg = res.data.msg;
-              this.handleQuery();
-              this.post = []
-
-            })
-            .catch((err) => {
-              this.msg = err.response.data.msg;
-              alert(this.msg)
-
-            });
-        }
-      },
-      updatePost(u) {
-        this.post.id = u.ID
-        this.post.title = u.title
-        this.post.content = u.content
-        this.button = "Update"
-      },
-      handleDelete(key) {
-        axios
-          .delete("/postapi/" + key)
-          .then((res) => {
-            this.msg = res.data.msg;
-            this.handleQuery();
-            alert(this.msg)
-          })
-          .catch((err) => {
-            this.msg = err.response.data.msg;
-            alert(this.msg)
-          });
-      },
-      onEditorChange({ quill, html, text }) {
-
-        this.post.content = html
-      },
-      uploadFunction(e) {
-        this.selectedFile = e.target.files[0];
-        var form = new FormData();
-        form.append("file", this.selectedFile);
-        form.append("name", this.selectedFile.name);
-
-        axios.post('./media-save', form, {
-          'headers': {
-            'Content-Type': "multipart/form-data"
-          }
-        })
-          .then(r => {
-            const range = this.$refs.quillEdit.quill.getSelection()
-            this.$refs.quillEdit.quill.insertEmbed(range.index, 'image', `./${r.data.url}`)
-          })
-          .catch(r => {
-            console.log('error')
-          })
-      }
-    }
-  })
+  
 </script>
 
 [%end%]
