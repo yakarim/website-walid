@@ -13,8 +13,9 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/admin", c.Admin).UseBefore(c.AuthMiddleware)
 	ctx.GET("/useradmin", c.UserHTML).UseBefore(c.AuthMiddleware)
 	ctx.GET("/postadmin", c.PostHTML).UseBefore(c.AuthMiddleware)
-	ctx.POST("/media-save", c.Img.ImageSave).UseBefore(c.AuthMiddleware)
+	ctx.PUT("/media-save", c.Img.ImageSave).UseBefore(c.AuthMiddleware)
 	ctx.GET("/media-get-{key}", c.Img.ImageGet).UseBefore(c.AuthMiddleware)
+	ctx.GET("/media-get-all", c.Img.GetImages).UseBefore(c.AuthMiddleware)
 
 	user := ctx.NewGroupPath("/userapi")
 	user.UseBefore(c.AuthMiddleware)
@@ -33,6 +34,6 @@ func (c *Ctrl) Router(ctx *atreugo.Atreugo) {
 // Home ...
 func (c Ctrl) Home(ctx *atreugo.RequestCtx) error {
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	jade.Index("home", c.Username(ctx), c.SessionAuth(ctx), ctx)
+	jade.Index("home", c.Username(ctx), c.SessionAuth(ctx), nil, ctx)
 	return nil
 }

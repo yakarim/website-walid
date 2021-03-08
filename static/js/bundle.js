@@ -20,6 +20,9 @@ new Vue({
   data() {
     return {
       posts: null,
+      images: [{
+        id: ''
+      }],
       msg: "",
       showModal: false,
       button: "Create",
@@ -27,7 +30,7 @@ new Vue({
         theme: 'snow',
         modules: {
           imageResize: {
-            displaySize: true
+            modules: ['Resize', 'DisplaySize']
           },
           toolbar: {
             container: [['bold', 'italic', 'underline'], ['blockquote', 'code-block'], [{
@@ -87,8 +90,6 @@ new Vue({
     },
 
     handlePost() {
-      console.log(this.$refs.quillEdit.quill.getSelection());
-
       if (this.post.id == "") {
         var data = {
           "title": this.post.title,
@@ -153,13 +154,16 @@ new Vue({
       var form = new FormData();
       form.append("file", this.selectedFile);
       form.append("name", this.selectedFile.name);
-      axios.post('./media-save', form, {
+      axios.put('./media-save', form, {
         'headers': {
           'Content-Type': "multipart/form-data"
         }
       }).then(r => {
         const range = this.$refs.quillEdit.quill.getSelection();
         this.$refs.quillEdit.quill.insertEmbed(range.index, 'image', `./${r.data.url}`);
+        let newObject = {
+          id: r.data.id
+        }; // this.images = newObject;
       }).catch(r => {
         console.log('error');
       });
@@ -171,12 +175,6 @@ new Vue({
 },{"axios":3,"quill":35,"quill-image-resize-module":34,"vue":40,"vue-axios":37,"vue-quill-editor":38}],2:[function(require,module,exports){
 var Vue = require('vue');
 
-var axios = require('axios');
-
-var VueAxios = require('vue-axios');
-
-Vue.use(VueAxios, axios);
-
 require('./app/post');
 
 new Vue({
@@ -186,7 +184,7 @@ new Vue({
   }
 });
 
-},{"./app/post":1,"axios":3,"vue":40,"vue-axios":37}],3:[function(require,module,exports){
+},{"./app/post":1,"vue":40}],3:[function(require,module,exports){
 module.exports = require('./lib/axios');
 },{"./lib/axios":5}],4:[function(require,module,exports){
 'use strict';

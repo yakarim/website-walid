@@ -3,10 +3,15 @@ package jade
 import (
 	"github.com/savsgio/atreugo/v11"
 	"github.com/yakarim/website-walid/database"
+	"github.com/yakarim/website-walid/model"
 )
 
 // Jade ...
 type Jade struct{}
+
+var (
+	m model.Img
+)
 
 // Router ...
 func (j Jade) Router(ctx *atreugo.Atreugo) {
@@ -26,7 +31,8 @@ func username(ctx *atreugo.RequestCtx) string {
 }
 
 func homefunc(ctx *atreugo.RequestCtx) error {
+	data, _ := m.QueryAll()
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	Index("home", username(ctx), database.SessionAuth(ctx), ctx)
+	Index("home", username(ctx), database.SessionAuth(ctx), data, ctx)
 	return nil
 }

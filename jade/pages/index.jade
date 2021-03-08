@@ -1,10 +1,22 @@
 //- index.jade
 extends ../base/layout.jade
 block go
-  :go:func Index(pageTitle, user string, signIn bool)
+  :go:func Index(pageTitle, user string, signIn bool, data []database.Images)
 
 block title
   title Article Title
 
 block content
   h1 My Article
+  div
+  table.table-bordered
+    thead
+      tr
+        th id
+        th name
+    tbody
+      each post in data
+        tr
+          td= post.UID
+          td= post.Name
+  

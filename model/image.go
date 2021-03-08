@@ -25,3 +25,12 @@ func (m Img) QueryOne(ID string) (database.Images, error) {
 	}
 	return post, nil
 }
+
+// QueryAll Image ...
+func (m Img) QueryAll() ([]database.Images, error) {
+	var post []database.Images
+	if err := db.Find(&post).Error; err != nil {
+		return post, err
+	}
+	return post, nil
+}

@@ -13,7 +13,6 @@
 [%block documentBody()%]
 <!-- Include the Quill library -->
 
-<script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
 
 <!-- Quill JS Vue -->
 
@@ -39,6 +38,7 @@
   </div>
 
   <div id="vueapp" class="demo">
+    {{images}}
     <div class="row">
       <form @submit.prevent="handlePost">
         <div class="form-group">
@@ -52,7 +52,7 @@
         <br />
         <div class="form-group">
           <input type="file" @change="uploadFunction" id="file" hidden>
-          <quill-editor v-model="post.content" :options="editorOption" ref="quillEdit" />
+          <quill-editor class="quill-editor content" v-model="post.content" :options="editorOption" ref="quillEdit" />
         </div>
 
         <br />
@@ -97,10 +97,9 @@
     </div>
   </div>
 </div>
-<script src="./js/bundle.js"></script>
 
 <script>
-  
+
 </script>
 
 [%end%]

@@ -50,7 +50,7 @@ func TestListAllSubscription(t *testing.T) {
 }
 func handler(ctx *fasthttp.RequestCtx) {
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	jade.Index("home", "string", true, ctx)
+	jade.Index("home", "string", true, nil, ctx)
 	ctx.SetStatusCode(fasthttp.StatusOK)
 }
 

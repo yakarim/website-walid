@@ -17,6 +17,15 @@ type Img struct {
 	img model.Img
 }
 
+// GetImages image
+func (i Img) GetImages(ctx *atreugo.RequestCtx) error {
+	imgs, _ := i.img.QueryAll()
+	for i, _ := range imgs {
+		imgs[i].Body = nil
+	}
+	return ctx.JSONResponse(imgs, 200)
+}
+
 // ImageGet controller
 func (i Img) ImageGet(ctx *atreugo.RequestCtx) error {
 	key := ctx.UserValue("key")
@@ -51,5 +60,5 @@ func (i Img) ImageSave(ctx *atreugo.RequestCtx) error {
 	if err != nil {
 		return i.JSON(ctx, cfg.H{"msg": "cant upload"}, fasthttp.StatusBadRequest)
 	}
-	return i.JSON(ctx, cfg.H{"url": "media-get-" + img.UID}, 200)
+	return i.JSON(ctx, cfg.H{"url": "media-get-" + img.UID, "id": img.UID}, 200)
 }
