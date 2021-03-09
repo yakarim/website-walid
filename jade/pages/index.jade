@@ -14,9 +14,13 @@ block content
       tr
         th id
         th name
+        th -
     tbody
       each post in data
         tr
           td= post.UID
           td= post.Name
+          td
+            a(href='/imgdelete/' + post.UID) #{post.Name}
+
   

@@ -16,6 +16,7 @@ var (
 // Router ...
 func (j Jade) Router(ctx *atreugo.Atreugo) {
 	ctx.GET("/home", homefunc)
+	ctx.GET("/imgdelete/{key}", imgdelete)
 }
 
 func username(ctx *atreugo.RequestCtx) string {
@@ -35,4 +36,10 @@ func homefunc(ctx *atreugo.RequestCtx) error {
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
 	Index("home", username(ctx), database.SessionAuth(ctx), data, ctx)
 	return nil
+}
+
+func imgdelete(ctx *atreugo.RequestCtx) error {
+	key := ctx.UserValue("key")
+	m.Delete(key.(string))
+	return ctx.RedirectResponse("/home", 200)
 }

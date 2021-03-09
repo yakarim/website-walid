@@ -34,3 +34,12 @@ func (m Img) QueryAll() ([]database.Images, error) {
 	}
 	return post, nil
 }
+
+// Delete ...
+func (m Img) Delete(id string) error {
+	if err := db.Delete(&database.Images{}, database.Images{UID: id}).Error; err != nil {
+		return err
+	}
+	return nil
+
+}
