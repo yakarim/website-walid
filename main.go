@@ -4,12 +4,10 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"runtime"
 
 	"github.com/atreugo/cors"
 	"github.com/joho/godotenv"
 	"github.com/savsgio/atreugo/v11"
-	fastprefork "github.com/valyala/fasthttp/prefork"
 	"github.com/yakarim/website-walid/cfg"
 	"github.com/yakarim/website-walid/cfg/cache"
 	"github.com/yakarim/website-walid/controller"
@@ -44,12 +42,12 @@ func init() {
 }
 
 func main() {
-	config, port := c.Port()
+	config, _ := c.Port()
 	ctx := atreugo.New(config)
 
 	cors := cors.New(cors.Config{
 		AllowedOrigins: []string{"http://localhost:3000/", "http://website-walid.herokuapp.com/", "https://website-walid.herokuapp.com/"},
-		//	AllowedHeaders:   []string{"Content-Type", "X-Custom"},
+		///	AllowedHeaders:   []string{"Content-Type", "X-Custom"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		ExposedHeaders:   []string{"Content-Length", "Authorization"},
 		AllowCredentials: true,
@@ -61,12 +59,14 @@ func main() {
 	c.Static(ctx)
 	ctrl.Router(ctx)
 	jde.Router(ctx)
-	preforkServer := &fastprefork.Prefork{
-		RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
-		ServeFunc:        ctx.Serve,
-	}
-
-	if err := preforkServer.ListenAndServe(port); err != nil {
+	/*
+		preforkServer := &fastprefork.Prefork{
+			RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
+			ServeFunc:        ctx.Serve,
+			Reuseport:        true,
+		}
+	*/
+	if err := ctx.ListenAndServe(); err != nil {
 		panic(err)
 	}
 }

@@ -24,7 +24,7 @@ func init() {
 
 	portln := os.Getenv("PORT")
 	if len(portln) == 0 {
-		cfg := postgre.NewConfigWith("127.0.0.1", 5432, "postgres", "1234", "walid", "session")
+		cfg := postgre.NewConfigWith("127.0.0.1", 5432, "postgres", "1234", "postgres", "session")
 		provider, err = postgre.New(cfg)
 
 	} else if !strings.HasPrefix(":", portln) {

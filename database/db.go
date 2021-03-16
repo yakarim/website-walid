@@ -23,7 +23,7 @@ func init() {
 	portln := os.Getenv("PORT")
 	dbport, _ := strconv.Atoi(os.Getenv("DB_PORT"))
 	if len(portln) == 0 {
-		db = pqsl("localhost", "postgres", "1234", "walid", "disable", 5432)
+		db = pqsl("localhost", "postgres", "1234", "postgres", "disable", 5432)
 	} else if !strings.HasPrefix(":", portln) {
 		db = pqsl(os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), "require", dbport)
 	}
