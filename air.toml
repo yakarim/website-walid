@@ -15,7 +15,7 @@ bin = "tmp/main"
 # Watch these filename extensions.
 include_ext = ["go"]
 # Ignore these filename extensions or directories.
-exclude_dir = ["assets", "tmp", "vendor", "vuejs", "static", "webpack", "template", "mod", "sum", "template", "wasm", "wasmgo", "wasmrs"]
+exclude_dir = [".git", "assets", "tmp", "vendor", "vuejs", "static", "webpack", "template", "mod", "sum", "template", "wasm", "wasmgo", "wasmrs"]
 # Watch these directories if you specified.
 include_dir = []
 # Exclude files.
