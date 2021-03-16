@@ -4,10 +4,12 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 
 	"github.com/atreugo/cors"
 	"github.com/joho/godotenv"
 	"github.com/savsgio/atreugo/v11"
+	fastprefork "github.com/valyala/fasthttp/prefork"
 	"github.com/yakarim/website-walid/cfg"
 	"github.com/yakarim/website-walid/cfg/cache"
 	"github.com/yakarim/website-walid/controller"
@@ -42,7 +44,7 @@ func init() {
 }
 
 func main() {
-	config, _ := c.Port()
+	config, port := c.Port()
 	ctx := atreugo.New(config)
 
 	cors := cors.New(cors.Config{
@@ -59,14 +61,13 @@ func main() {
 	c.Static(ctx)
 	ctrl.Router(ctx)
 	jde.Router(ctx)
-	/*
-		preforkServer := &fastprefork.Prefork{
-			RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
-			ServeFunc:        ctx.Serve,
-			Reuseport:        true,
-		}
-	*/
-	if err := ctx.ListenAndServe(); err != nil {
+	preforkServer := &fastprefork.Prefork{
+		RecoverThreshold: runtime.GOMAXPROCS(0) / 4,
+		ServeFunc:        ctx.Serve,
+		Reuseport:        true,
+	}
+
+	if err := preforkServer.ListenAndServe(port); err != nil {
 		panic(err)
 	}
 }
